@@ -15,7 +15,7 @@ public class CannonPieceService implements IPieceService {
     }
 
     @Override
-    public Step makeMove() {
+    public Step doMove() {
         return null;
     }
 }

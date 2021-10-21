@@ -9,6 +9,7 @@ public class Game {
     private Map<Player, Set<Piece>> PlayerToPieceMap = new HashMap();
     private Map<Piece, Player> pieceToPlayerMap = new LinkedHashMap<>();
     private List<Step> steps = new ArrayList<>();
+    private Queue<Player> players = new LinkedList<>();
 
     public Map<Piece, Cell> getPieceToCellMap() {
         return pieceToCellMap;
@@ -48,5 +49,13 @@ public class Game {
 
     public void setSteps(List<Step> steps) {
         this.steps = steps;
+    }
+
+    public Queue<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Queue<Player> players) {
+        this.players = players;
     }
 }
