@@ -8,15 +8,9 @@ import java.util.Map;
 
 public class Cell {
 
-    private final ColorEnum color;
     private final Map<Direction, Cell> neighbors = new LinkedHashMap<>();
 
-    public Cell(ColorEnum color) {
-        this.color = color;
-    }
-
-    public ColorEnum getColor() {
-        return color;
+    public Cell() {
     }
 
     public Map<Direction, Cell> getNeighbors() {
@@ -25,8 +19,6 @@ public class Cell {
 
     @Override
     public String toString() {
-        return "Cell{" +
-                "color=" + color +
-                '}';
+        return "Cell{}";
     }
 }

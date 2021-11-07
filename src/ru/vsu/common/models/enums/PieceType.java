@@ -2,53 +2,25 @@ package ru.vsu.common.models.enums;
 
 public enum PieceType {
 
-    ROOK(" R") {
-        @Override
-        public boolean isKing() {
-            return false;
-        }
+    ROOK("R") {
     }, //ладья
 
-    KNIGHT(" N") {
-        @Override
-        public boolean isKing() {
-            return false;
-        }
+    KNIGHT("N") {
     }, //конь
 
-    BISHOP(" B") {
-        @Override
-        public boolean isKing() {
-            return false;
-        }
+    BISHOP("B") {
     }, //слон
 
-    GUARD(" G") {
-        @Override
-        public boolean isKing() {
-            return false;
-        }
+    GUARD("G") {
     }, //стража
 
-    KING(" K") {
-        @Override
-        public boolean isKing() {
-            return true;
-        }
+    KING("K") {
     }, //король
 
-    CANNON(" C") {
-        @Override
-        public boolean isKing() {
-            return false;
-        }
+    CANNON("C") {
     }, //пушка
 
-    PAWN(" P") {
-        @Override
-        public boolean isKing() {
-            return false;
-        }
+    PAWN("P") {
     }; //пешка
 
 
@@ -62,6 +34,4 @@ public enum PieceType {
     public String toString() {
         return this.pieceName;
     }
-
-    public abstract boolean isKing();
 }

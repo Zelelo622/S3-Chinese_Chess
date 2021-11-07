@@ -1,7 +1,6 @@
 package ru.vsu.common.services;
 
 import ru.vsu.common.models.Cell;
-import ru.vsu.common.models.enums.ColorEnum;
 import ru.vsu.common.models.enums.Direction;
 
 import java.util.ArrayList;
@@ -14,13 +13,14 @@ public class GameService {
 
     public List<List<Cell>> initBoard() {
         List<List<Cell>> graph = new ArrayList<>();
-        List<Cell> prevRow;
-        prevRow = null;
+        List<Cell> prevRow = null;
+        Cell prevCell;
+        Cell currCell;
         for (int row = 0; row < BOARD_ROW; row++) {
-            Cell prevCell = null;
+            prevCell = null;
             List<Cell> currRow = new ArrayList<>();
             for (int col = 0; col < BOARD_COL; col++) {
-                Cell currCell = new Cell(ColorEnum.BLACK);
+                currCell = new Cell();
                 if (prevCell != null) {
                     currCell.getNeighbors().put(Direction.WEST, prevCell);
                     prevCell.getNeighbors().put(Direction.EAST, currCell);
@@ -35,9 +35,9 @@ public class GameService {
                         prevRowCell.getNeighbors().put(Direction.NORTH, currentRowCell);
                     }
                 }
-                prevRow = currRow;
             }
-            graph.add(prevRow);
+            graph.add(currRow);
+            prevRow = currRow;
         }
         return graph;
     }
