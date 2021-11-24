@@ -204,8 +204,8 @@ public class GameService {
             Player player
     ) {
         for (int i = BOARD_COL - 1, k = 0; i > (BOARD_COL - 1) / 2 && k < pieces.size(); i--, k++) {
-            game.getPieceToCellMap().put(new Piece(pieces.get(k), ColorEnum.WHITE), board.get(BOARD_COL - 1).get(i));
-            game.getCellToPieceMap().put(board.get(BOARD_COL - 1).get(i), new Piece(pieces.get(k), ColorEnum.WHITE));
+            game.getPieceToCellMap().put(new Piece(pieces.get(k), ColorEnum.WHITE), board.get(0).get(i));
+            game.getCellToPieceMap().put(board.get(0).get(i), new Piece(pieces.get(k), ColorEnum.WHITE));
             playerPieces.add(new Piece(pieces.get(k), ColorEnum.WHITE));
             game.getPlayerToPieceMap().put(player, playerPieces);
             game.getPieceToPlayerMap().put(new Piece(pieces.get(k), ColorEnum.WHITE), player);
@@ -220,8 +220,8 @@ public class GameService {
             Player player
     ) {
         for (int i = 0; i < (BOARD_COL - 1) / 2; i++) {
-            game.getPieceToCellMap().put(new Piece(pieces.get(i), ColorEnum.BLACK), board.get(BOARD_COL - 1).get(i));
-            game.getCellToPieceMap().put(board.get(BOARD_COL - 1).get(i), new Piece(pieces.get(i), ColorEnum.BLACK));
+            game.getPieceToCellMap().put(new Piece(pieces.get(i), ColorEnum.BLACK), board.get(BOARD_COL).get(i));
+            game.getCellToPieceMap().put(board.get(BOARD_COL).get(i), new Piece(pieces.get(i), ColorEnum.BLACK));
             playerPieces.add(new Piece(pieces.get(i), ColorEnum.BLACK));
             game.getPlayerToPieceMap().put(player, playerPieces);
             game.getPieceToPlayerMap().put(new Piece(pieces.get(i), ColorEnum.BLACK), player);
@@ -235,9 +235,9 @@ public class GameService {
             Game game,
             Player player
     ) {
-        for (int i = BOARD_COL - 1, k = 0; i > (BOARD_COL - 2) / 2 && k < pieces.size(); i--, k++) {
-            game.getPieceToCellMap().put(new Piece(pieces.get(k), ColorEnum.BLACK), board.get(BOARD_COL - 1).get(i));
-            game.getCellToPieceMap().put(board.get(BOARD_COL - 1).get(i), new Piece(pieces.get(k), ColorEnum.BLACK));
+        for (int i = BOARD_COL - 1, k = 0; i > (BOARD_COL - 1) / 2 && k < pieces.size(); i--, k++) {
+            game.getPieceToCellMap().put(new Piece(pieces.get(k), ColorEnum.BLACK), board.get(BOARD_COL).get(i));
+            game.getCellToPieceMap().put(board.get(BOARD_COL).get(i), new Piece(pieces.get(k), ColorEnum.BLACK));
             playerPieces.add(new Piece(pieces.get(k), ColorEnum.BLACK));
             game.getPlayerToPieceMap().put(player, playerPieces);
             game.getPieceToPlayerMap().put(new Piece(pieces.get(k), ColorEnum.BLACK), player);
@@ -266,6 +266,5 @@ public class GameService {
         southEastCell.getNeighbors().put(Direction.SOUTH_EAST, new Cell());
         southEastCell.getNeighbors().get(Direction.SOUTH_EAST).getNeighbors().
                 put(Direction.NORTH_WEST, southEastCell);
-        //
     }
 }
