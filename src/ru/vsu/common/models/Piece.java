@@ -17,7 +17,7 @@ public class Piece {
         return pieceType;
     }
 
-    public ColorEnum getColorEnum() {
+    public ColorEnum getPieceColor() {
         return colorEnum;
     }
 }
