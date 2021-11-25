@@ -46,8 +46,7 @@ public class Main {
         PawnPieceService pawnPieceService = new PawnPieceService();
         Set<Piece> pieces = game.getPlayerToPieceMap().get(player1);
         List<Piece> pieces1 = new ArrayList<>(pieces);
-//        Cell testCell = game.getPieceToCellMap().get(pieces1.get(0));
-        Cell testCell = game.getPieceToCellMap().get(pieces1.get(0));
+        //Cell testCell = game.getPieceToCellMap().get(pieces1.get(0));
         pawnPieceService.getPossibleMoves(game, pieces1.get(0));
     }
 }

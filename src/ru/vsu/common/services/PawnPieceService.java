@@ -12,7 +12,7 @@ import java.util.*;
 public class PawnPieceService implements IPieceService {
 
     @Override
-    public Step doMove() {
+    public Step doMove(Game game) {
         return null;
     }
 

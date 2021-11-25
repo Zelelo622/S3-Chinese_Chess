@@ -11,5 +11,5 @@ public interface IPieceService {
 
     public List<Cell> getPossibleMoves(Game game, Piece piece);
 
-    public Step doMove();
+    public Step doMove(Game game);
 }

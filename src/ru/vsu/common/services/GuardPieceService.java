@@ -15,7 +15,8 @@ public class GuardPieceService implements IPieceService {
     }
 
     @Override
-    public Step doMove() {
+    public Step doMove(Game game) {
         return null;
     }
+
 }
