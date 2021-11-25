@@ -126,7 +126,7 @@ public class GameService {
         initBlackPieces(board, pieces, secondPlayerPieces, game, secondPlayer);
     }
 
-    private void initWhitePawnsPieces(
+    private void initBlackPawnsPieces(
             List<List<Cell>> board,
             Set<Piece> playerPieces,
             Game game,
@@ -134,7 +134,7 @@ public class GameService {
     ) {
 
         for (int i = 0; i < BOARD_COL; i += 2) {
-            Piece pawn = new Piece(PieceType.PAWN, ColorEnum.WHITE);
+            Piece pawn = new Piece(PieceType.PAWN, ColorEnum.BLACK);
             game.getPieceToCellMap().put(pawn, board.get(3).get(i));
             game.getCellToPieceMap().put(board.get(3).get(i), pawn);
             playerPieces.add(pawn);
@@ -162,15 +162,14 @@ public class GameService {
         initRightWhitePieces(board, pieces, playerPieces, game, firstPlayer);
     }
 
-    private void initBlackPawnsPieces(
+    private void initWhitePawnsPieces(
             List<List<Cell>> board,
             Set<Piece> playerPieces,
             Game game,
             Player secondPlayer
     ) {
-
-        Piece pawn = new Piece(PieceType.PAWN, ColorEnum.WHITE);
         for (int i = 0; i < BOARD_COL; i += 2) {
+            Piece pawn = new Piece(PieceType.PAWN, ColorEnum.WHITE);
             game.getPieceToCellMap().put(pawn, board.get(6).get(i));
             game.getCellToPieceMap().put(board.get(6).get(i), pawn);
             playerPieces.add(pawn);
@@ -190,40 +189,6 @@ public class GameService {
         initRightBlackPieces(board, pieces, playerPieces, game, secondPlayer);
     }
 
-    private void initLeftWhitePieces(
-            List<List<Cell>> board,
-            List<PieceType> pieces,
-            Set<Piece> playerPieces,
-            Game game,
-            Player player
-    ) {
-        for (int i = 0; i < (BOARD_COL - 1) / 2; i++) {
-            Piece piece = new Piece(pieces.get(i), ColorEnum.WHITE);
-            game.getPieceToCellMap().put(piece, board.get(0).get(i));
-            game.getCellToPieceMap().put(board.get(0).get(i), piece);
-            playerPieces.add(piece);
-            game.getPlayerToPieceMap().put(player, playerPieces);
-            game.getPieceToPlayerMap().put(piece, player);
-        }
-    }
-
-    private void initRightWhitePieces(
-            List<List<Cell>> board,
-            List<PieceType> pieces,
-            Set<Piece> playerPieces,
-            Game game,
-            Player player
-    ) {
-        for (int i = BOARD_COL - 1, k = 0; i > (BOARD_COL - 1) / 2 && k < pieces.size(); i--, k++) {
-            Piece piece = new Piece(pieces.get(k), ColorEnum.WHITE);
-            game.getPieceToCellMap().put(piece, board.get(0).get(i));
-            game.getCellToPieceMap().put(board.get(0).get(i), piece);
-            playerPieces.add(piece);
-            game.getPlayerToPieceMap().put(player, playerPieces);
-            game.getPieceToPlayerMap().put(piece, player);
-        }
-    }
-
     private void initLeftBlackPieces(
             List<List<Cell>> board,
             List<PieceType> pieces,
@@ -233,8 +198,8 @@ public class GameService {
     ) {
         for (int i = 0; i < (BOARD_COL - 1) / 2; i++) {
             Piece piece = new Piece(pieces.get(i), ColorEnum.BLACK);
-            game.getPieceToCellMap().put(piece, board.get(BOARD_COL).get(i));
-            game.getCellToPieceMap().put(board.get(BOARD_COL).get(i), piece);
+            game.getPieceToCellMap().put(piece, board.get(0).get(i));
+            game.getCellToPieceMap().put(board.get(0).get(i), piece);
             playerPieces.add(piece);
             game.getPlayerToPieceMap().put(player, playerPieces);
             game.getPieceToPlayerMap().put(piece, player);
@@ -250,6 +215,40 @@ public class GameService {
     ) {
         for (int i = BOARD_COL - 1, k = 0; i > (BOARD_COL - 1) / 2 && k < pieces.size(); i--, k++) {
             Piece piece = new Piece(pieces.get(k), ColorEnum.BLACK);
+            game.getPieceToCellMap().put(piece, board.get(0).get(i));
+            game.getCellToPieceMap().put(board.get(0).get(i), piece);
+            playerPieces.add(piece);
+            game.getPlayerToPieceMap().put(player, playerPieces);
+            game.getPieceToPlayerMap().put(piece, player);
+        }
+    }
+
+    private void initLeftWhitePieces(
+            List<List<Cell>> board,
+            List<PieceType> pieces,
+            Set<Piece> playerPieces,
+            Game game,
+            Player player
+    ) {
+        for (int i = 0; i < (BOARD_COL - 1) / 2; i++) {
+            Piece piece = new Piece(pieces.get(i), ColorEnum.WHITE);
+            game.getPieceToCellMap().put(piece, board.get(BOARD_COL).get(i));
+            game.getCellToPieceMap().put(board.get(BOARD_COL).get(i), piece);
+            playerPieces.add(piece);
+            game.getPlayerToPieceMap().put(player, playerPieces);
+            game.getPieceToPlayerMap().put(piece, player);
+        }
+    }
+
+    private void initRightWhitePieces(
+            List<List<Cell>> board,
+            List<PieceType> pieces,
+            Set<Piece> playerPieces,
+            Game game,
+            Player player
+    ) {
+        for (int i = BOARD_COL - 1, k = 0; i > (BOARD_COL - 1) / 2 && k < pieces.size(); i--, k++) {
+            Piece piece = new Piece(pieces.get(k), ColorEnum.WHITE);
             game.getPieceToCellMap().put(piece, board.get(BOARD_COL).get(i));
             game.getCellToPieceMap().put(board.get(BOARD_COL).get(i), piece);
             playerPieces.add(piece);
