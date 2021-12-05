@@ -1,6 +1,5 @@
 package ru.vsu.common.models;
 
-import ru.vsu.common.models.enums.ColorEnum;
 import ru.vsu.common.models.enums.Direction;
 
 import java.util.LinkedHashMap;
@@ -18,6 +17,6 @@ public class Cell {
 
     @Override
     public String toString() {
-        return "Cell{}";
+        return ".";
     }
 }

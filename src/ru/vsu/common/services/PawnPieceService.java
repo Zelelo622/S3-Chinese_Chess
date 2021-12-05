@@ -23,40 +23,8 @@ public class PawnPieceService implements IPieceService {
         ColorEnum pieceColor = piece.getPieceColor();
         Map<Piece, Cell> pieceCellMap = game.getPieceToCellMap();
         Direction direction = getDirection(piece);
-
-        if(isFirstPawnMove(game, piece, direction)) {
-            possibleMoves.addAll(firstPawnStep(game, piece, direction));
-        } else {
-            possibleMoves.add(findPawnStep(game, piece, direction));
-        }
+        possibleMoves.add(findPawnStep(game, piece, direction));
         return null;
-    }
-
-    private List<Cell> firstPawnStep(Game game, Piece piece, Direction direction) {
-        List<Cell> firstSteps = new ArrayList<>();
-        Map<Piece, Cell> pieceCellMap = game.getPieceToCellMap();
-        Cell currCell = pieceCellMap.get(piece);
-        Cell nextCell;
-        Cell nextLeftCell;
-        Cell nextRightCell;
-
-        for (int i = 0; i < 3; i++) {
-            nextCell = currCell.getNeighbors().get(direction);
-            nextLeftCell = nextCell.getNeighbors().get(Direction.WEST);
-            nextRightCell = nextCell.getNeighbors().get(Direction.EAST);
-            firstSteps.add(nextCell);
-
-            nextCell = currCell.getNeighbors().get(direction);
-            if(isAttackAvailable(game, piece, nextLeftCell)) {
-                firstSteps.add(nextLeftCell);
-            }
-
-            if(isAttackAvailable(game, piece, nextRightCell)) {
-                firstSteps.add(nextRightCell);
-            }
-            currCell = nextCell;
-        }
-        return firstSteps;
     }
 
     private Cell findPawnStep(Game game, Piece piece, Direction direction) {
@@ -67,13 +35,6 @@ public class PawnPieceService implements IPieceService {
             return nextCell;
         }
         return null;
-    }
-
-    private boolean isFirstPawnMove(Game game, Piece piece, Direction direction) {
-        Cell currCell = game.getPieceToCellMap().get(piece);
-
-        Cell prevCell = currCell.getNeighbors().get(direction);
-        return prevCell.getNeighbors().get(direction) == null;
     }
 
     private Direction getDirection(Piece piece) {
