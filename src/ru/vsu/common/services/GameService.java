@@ -20,6 +20,8 @@ public class GameService {
 
         Cell prevCell;
         Cell currCell;
+        Cell leftDiagonalCell;
+        Cell rightDiagonalCell;
         List<Cell> prevRow = null;
         for (int row = 0; row < BOARD_ROW; row++) {
             prevCell = null;
@@ -38,6 +40,16 @@ public class GameService {
                         Cell prevRowCell = prevRow.get(k);
                         currRowCell.getNeighbors().put(Direction.NORTH, prevRowCell);
                         prevRowCell.getNeighbors().put(Direction.SOUTH, currRowCell);
+                        if (k > 0) {
+                            leftDiagonalCell = prevRow.get(k - 1);
+                            currRowCell.getNeighbors().put(Direction.NORTH_WEST, leftDiagonalCell);
+                            leftDiagonalCell.getNeighbors().put(Direction.NORTH_EAST, currCell);
+                        }
+                        if (k < currRow.size() - 1) {
+                            rightDiagonalCell = prevRow.get(k + 1);
+                            currRowCell.getNeighbors().put(Direction.NORTH_EAST, rightDiagonalCell);
+                            rightDiagonalCell.getNeighbors().put(Direction.SOUTH_WEST, currCell);
+                        }
                     }
                 }
             }
