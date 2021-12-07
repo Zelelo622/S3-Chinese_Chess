@@ -59,7 +59,7 @@ public class GameService {
         return graph;
     }
 
-    public void initBorderCells2(List<List<Cell>> board, Game game ) {
+    public void initBorderCells(List<List<Cell>> board, Game game ) {
         List<Cell> list = game.getBorderCells();
         list.addAll(board.get(4));
         list.addAll(board.get(5));

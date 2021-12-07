@@ -4,14 +4,44 @@ import ru.vsu.common.models.Cell;
 import ru.vsu.common.models.Game;
 import ru.vsu.common.models.Piece;
 import ru.vsu.common.models.Step;
+import ru.vsu.common.models.enums.Direction;
 
-import java.util.List;
+import java.util.*;
 
 public class RookPieceService implements IPieceService {
 
     @Override
     public List<Cell> getPossibleMoves(Game game, Piece piece) {
-        return null;
+        List<Cell> possibleMoves = new ArrayList<>();
+        Set<Cell> beatMoves = new LinkedHashSet<>();
+        List<Direction> directions = Arrays.asList(Direction.NORTH, Direction.EAST, Direction.WEST, Direction.SOUTH);
+        possibleMoves.addAll(findRookStep(game, piece, directions));
+        return possibleMoves;
+    }
+
+    private List<Cell> findRookStep(Game game, Piece piece, List<Direction> directions) {
+        List<Cell> possibleMoves = new ArrayList<>();
+        Cell pieceCell = game.getPieceToCellMap().get(piece);
+        Cell currCell;
+        Cell nextCell;
+        Direction direction;
+        for (Direction value : directions) {
+            direction = value;
+            nextCell = pieceCell.getNeighbors().get(direction);
+            while (isMoveAvailable(game, nextCell)) {
+                possibleMoves.add(nextCell);
+                currCell = nextCell;
+                nextCell = currCell.getNeighbors().get(direction);
+            }
+        }
+        return possibleMoves;
+    }
+
+    private boolean isMoveAvailable(Game game, Cell testedCell) {
+        if (testedCell != null) {
+            return game.getCellToPieceMap().get(testedCell) == null;
+        }
+        return false;
     }
 
     @Override

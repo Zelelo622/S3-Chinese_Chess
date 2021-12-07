@@ -4,10 +4,7 @@ import ru.vsu.common.models.Cell;
 import ru.vsu.common.models.Game;
 import ru.vsu.common.models.Piece;
 import ru.vsu.common.models.Player;
-import ru.vsu.common.services.BishopPieceService;
-import ru.vsu.common.services.GameService;
-import ru.vsu.common.services.KnightPieceService;
-import ru.vsu.common.services.PawnPieceService;
+import ru.vsu.common.services.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +18,12 @@ public class Main {
         Player player2 = new Player("Геннадий");
         GameService gs = new GameService();
         List<List<Cell>> board = gs.initBoard();
-        gs.initBorderCells2(board, game);
-//        game.setBorderCells(gs.initBorderCells(board));
+        gs.initBorderCells(board, game);
         gs.initPieces(board, game, player1, player2);
-        BishopPieceService bishopPieceService = new BishopPieceService();
+        RookPieceService rookPieceService = new RookPieceService();
         Set<Piece> pieces = game.getPlayerToPieceMap().get(player2);
         List<Piece> pieces1 = new ArrayList<>(pieces);
-        List<Cell> testList = bishopPieceService.getPossibleMoves(game, pieces1.get(5));
+        List<Cell> testList = rookPieceService.getPossibleMoves(game, pieces1.get(6));
     }
 
     private static void printBoard(List<List<Cell>> board, Game game) {
