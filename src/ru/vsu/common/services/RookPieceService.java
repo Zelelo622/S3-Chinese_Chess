@@ -28,20 +28,30 @@ public class RookPieceService implements IPieceService {
         for (Direction value : directions) {
             direction = value;
             nextCell = pieceCell.getNeighbors().get(direction);
-            while (isMoveAvailable(game, nextCell)) {
+            while (isMoveAvailable(game, piece, nextCell)) {
                 possibleMoves.add(nextCell);
                 currCell = nextCell;
                 nextCell = currCell.getNeighbors().get(direction);
+                if (isMoveAvailable(game, piece, nextCell) && stopsAfterKill(game, piece, nextCell)) {
+                    break;
+                }
             }
         }
         return possibleMoves;
     }
 
-    private boolean isMoveAvailable(Game game, Cell testedCell) {
+    private boolean isMoveAvailable(Game game, Piece piece, Cell testedCell) {
         if (testedCell != null) {
-            return game.getCellToPieceMap().get(testedCell) == null;
+            return ((game.getCellToPieceMap().get(testedCell) == null) ||
+                        (game.getCellToPieceMap().get(testedCell) != null) &&
+                            (game.getCellToPieceMap().get(testedCell).getPieceColor() != piece.getPieceColor()));
         }
         return false;
+    }
+
+    private boolean stopsAfterKill(Game game, Piece piece, Cell testedCell) {
+            return ((game.getCellToPieceMap().get(testedCell) != null) &&
+                    (game.getCellToPieceMap().get(testedCell).getPieceColor() != piece.getPieceColor()));
     }
 
     @Override

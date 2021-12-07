@@ -30,7 +30,7 @@ public class BishopPieceService implements IPieceService {
             direction = value;
             nextCell = pieceCell.getNeighbors().get(direction);
             for (int j = 0; j < 2; j++) {
-                if (isMoveAvailable(game, nextCell)) {
+                if (isMoveAvailable(game, piece, nextCell)) {
                     currCell = nextCell;
                     nextCell = currCell.getNeighbors().get(direction);
                     if (j == 1) {
@@ -44,14 +44,16 @@ public class BishopPieceService implements IPieceService {
         return possibleMoves;
     }
 
-    private boolean isMoveAvailable(Game game, Cell testedCell) {
+    private boolean isMoveAvailable(Game game, Piece piece, Cell testedCell) {
         if(testedCell != null) {
             for (int i = 0; i < game.getBorderCells().size(); i++) {
                 if (testedCell == game.getBorderCells().get(i)) {
                     return false;
                 }
             }
-            return game.getCellToPieceMap().get(testedCell) == null;
+            return ((game.getCellToPieceMap().get(testedCell) == null) ||
+                    (game.getCellToPieceMap().get(testedCell) != null) &&
+                            (game.getCellToPieceMap().get(testedCell).getPieceColor() != piece.getPieceColor()));
         }
         return false;
     }

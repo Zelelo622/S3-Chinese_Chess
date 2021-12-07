@@ -23,7 +23,7 @@ public class Main {
         RookPieceService rookPieceService = new RookPieceService();
         Set<Piece> pieces = game.getPlayerToPieceMap().get(player2);
         List<Piece> pieces1 = new ArrayList<>(pieces);
-        List<Cell> testList = rookPieceService.getPossibleMoves(game, pieces1.get(6));
+        List<Cell> testList = rookPieceService.getPossibleMoves(game, pieces1.get(10));
     }
 
     private static void printBoard(List<List<Cell>> board, Game game) {
