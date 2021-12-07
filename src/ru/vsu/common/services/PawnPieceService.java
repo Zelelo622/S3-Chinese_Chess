@@ -18,23 +18,29 @@ public class PawnPieceService implements IPieceService {
 
     @Override
     public List<Cell> getPossibleMoves(Game game, Piece piece) {
-        Set<Cell> possibleMoves = new LinkedHashSet<>();
-        Set<Cell> beatMoves = new LinkedHashSet<>();
-        ColorEnum pieceColor = piece.getPieceColor();
-        Map<Piece, Cell> pieceCellMap = game.getPieceToCellMap();
         Direction direction = getDirection(piece);
-        possibleMoves.add(findPawnStep(game, piece, direction));
-        return null;
+        List<Cell> possibleMoves = new ArrayList<>(findPawnStep(game, piece, direction));
+        Set<Cell> beatMoves = new LinkedHashSet<>();
+        return possibleMoves;
     }
 
-    private Cell findPawnStep(Game game, Piece piece, Direction direction) {
+    private List<Cell> findPawnStep(Game game, Piece piece, Direction direction) {
+        List<Cell> availableCell = new ArrayList<>();
         Cell currentCell = game.getPieceToCellMap().get(piece);
         Cell nextCell = currentCell.getNeighbors().get(direction);
+        Cell nextLeftCell = currentCell.getNeighbors().get(Direction.WEST);
+        Cell nextRightCell = currentCell.getNeighbors().get(Direction.EAST);
 
         if(isMoveAvailable(game, nextCell)) {
-            return nextCell;
+            availableCell.add(nextCell);
         }
-        return null;
+        if (isMoveAvailable(game, nextLeftCell)) {
+            availableCell.add(nextLeftCell);
+        }
+        if (isMoveAvailable(game, nextRightCell)) {
+            availableCell.add(nextRightCell);
+        }
+        return availableCell;
     }
 
     private Direction getDirection(Piece piece) {

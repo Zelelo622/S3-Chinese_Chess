@@ -4,6 +4,7 @@ import ru.vsu.common.models.Cell;
 import ru.vsu.common.models.Game;
 import ru.vsu.common.models.Piece;
 import ru.vsu.common.models.Player;
+import ru.vsu.common.services.BishopPieceService;
 import ru.vsu.common.services.GameService;
 import ru.vsu.common.services.KnightPieceService;
 import ru.vsu.common.services.PawnPieceService;
@@ -14,53 +15,17 @@ import java.util.Set;
 
 public class Main {
 
-//    public static void main(String[] args) {
-////        GameService gameService = new GameService();
-//////        for (int i = 0; i < gameService.initBoard().size(); i++) {
-//////            System.out.println(gameService.initBoard().remove(i));
-//////        }
-////        Game game = new Game();
-////        Player player1 = new Player("1");
-////        Player player2 = new Player("2");
-////        List<List<Cell>> board = gameService.initBoard();
-////        gameService.initBlackPawns(board, game, player1);
-////        gameService.initWhitePawns(board, game, player2);
-//
-//        Game game = new Game();
-//        Player player1 = new Player("Василий");
-//        Player player2 = new Player("Геннадий");
-//        GameService gs = new GameService();
-//        List<List<Cell>> board = gs.initBoard();
-//        gs.initPieces(board, game, player1, player2);
-//
-////        gs.initWhitePawns(board, game, player1);
-////        gs.initBlackPawns(board, game, player2);
-//    }
-
     public static void main(String[] args) {
-//        Game game = new Game();
-//        Player player1 = new Player("Василий");
-//        Player player2 = new Player("Геннадий");
-//        GameService gs = new GameService();
-//        List<List<Cell>> board = gs.initBoard();
-//        gs.initPieces(board, game, player1, player2);
-////        printBoard(board, game);
-//        PawnPieceService pawnPieceService = new PawnPieceService();
-//        Set<Piece> pieces = game.getPlayerToPieceMap().get(player1);
-//        List<Piece> pieces1 = new ArrayList<>(pieces);
-//        //Cell testCell = game.getPieceToCellMap().get(pieces1.get(0));
-//        pawnPieceService.getPossibleMoves(game, pieces1.get(0));
         Game game = new Game();
         Player player1 = new Player("Василий");
         Player player2 = new Player("Геннадий");
         GameService gs = new GameService();
         List<List<Cell>> board = gs.initBoard();
         gs.initPieces(board, game, player1, player2);
-        PawnPieceService pawnPieceService = new PawnPieceService();
-        KnightPieceService knightPieceService = new KnightPieceService();
+        BishopPieceService bishopPieceService = new BishopPieceService();
         Set<Piece> pieces = game.getPlayerToPieceMap().get(player2);
         List<Piece> pieces1 = new ArrayList<>(pieces);
-        List<Cell> testList = knightPieceService.getPossibleMoves(game, pieces1.get(11));
+        List<Cell> testList = bishopPieceService.getPossibleMoves(game, pieces1.get(8));
     }
 
     private static void printBoard(List<List<Cell>> board, Game game) {

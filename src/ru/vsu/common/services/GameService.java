@@ -23,10 +23,10 @@ public class GameService {
         Cell leftDiagonalCell;
         Cell rightDiagonalCell;
         List<Cell> prevRow = null;
-        for (int row = 0; row < BOARD_ROW; row++) {
+        for (int i = 0; i < BOARD_ROW; i++) {
             prevCell = null;
             List<Cell> currRow = new ArrayList<>();
-            for (int col = 0; col < BOARD_COL; col++) {
+            for (int j = 0; j < BOARD_COL; j++) {
                 currCell = new Cell();
                 if (prevCell != null) {
                     currCell.getNeighbors().put(Direction.WEST, prevCell);
@@ -40,15 +40,15 @@ public class GameService {
                         Cell prevRowCell = prevRow.get(k);
                         currRowCell.getNeighbors().put(Direction.NORTH, prevRowCell);
                         prevRowCell.getNeighbors().put(Direction.SOUTH, currRowCell);
-                        if (k > 0) {
+                        if(k > 0) {
                             leftDiagonalCell = prevRow.get(k - 1);
                             currRowCell.getNeighbors().put(Direction.NORTH_WEST, leftDiagonalCell);
-                            leftDiagonalCell.getNeighbors().put(Direction.NORTH_EAST, currCell);
+                            leftDiagonalCell.getNeighbors().put(Direction.SOUTH_EAST, currRowCell);
                         }
-                        if (k < currRow.size() - 1) {
+                        if(k < currRow.size() - 1) {
                             rightDiagonalCell = prevRow.get(k + 1);
                             currRowCell.getNeighbors().put(Direction.NORTH_EAST, rightDiagonalCell);
-                            rightDiagonalCell.getNeighbors().put(Direction.SOUTH_WEST, currCell);
+                            rightDiagonalCell.getNeighbors().put(Direction.SOUTH_WEST, currRowCell);
                         }
                     }
                 }
@@ -56,13 +56,12 @@ public class GameService {
             graph.add(currRow);
             prevRow = currRow;
         }
-        initWizardsCells(graph);
         return graph;
     }
 
     public void initPieces(List<List<Cell>> board, Game game, Player firstPlayer, Player secondPlayer) {
         List<PieceType> pieces =
-                Arrays.asList(PieceType.BISHOP, PieceType.KNIGHT, PieceType.ROOK, PieceType.GUARD);
+                Arrays.asList(PieceType.ROOK, PieceType.KNIGHT, PieceType.BISHOP, PieceType.GUARD);
         Set<Piece> firstPlayerPieces = new LinkedHashSet<>();
         Set<Piece> secondPlayerPieces = new LinkedHashSet<>();
 
@@ -87,14 +86,6 @@ public class GameService {
             game.getPlayerToPieceMap().put(firstPlayer, playerPieces);
             game.getPieceToPlayerMap().put(pawn, firstPlayer);
         }
-
-//        for (int i = 0; i < BOARD_COL; i += 2) {
-//            game.getPieceToCellMap().put(new Piece(PieceType.PAWN, ColorEnum.WHITE), board.get(3).get(i));
-//            game.getCellToPieceMap().put(board.get(3).get(i), new Piece(PieceType.PAWN, ColorEnum.WHITE));
-//            playerPieces.add(new Piece(PieceType.PAWN, ColorEnum.WHITE));
-//            game.getPlayerToPieceMap().put(firstPlayer, playerPieces);
-//            game.getPieceToPlayerMap().put(new Piece(PieceType.PAWN, ColorEnum.WHITE), firstPlayer);
-//        }
     }
 
     private void initWhitePieces(
@@ -241,29 +232,5 @@ public class GameService {
             game.getPlayerToPieceMap().put(player, playerPieces);
             game.getPieceToPlayerMap().put(piece, player);
         }
-    }
-
-    private void initWizardsCells(List<List<Cell>> board) {
-        Cell northWestCell = board.get(0).get(0);
-        Cell northEastCell = board.get(0).get(board.size() - 2);
-        Cell southWestCell = board.get(board.size() - 1).get(0);
-        Cell southEastCell = board.get(board.size() - 1).get(board.size() - 2);
-
-
-        northWestCell.getNeighbors().put(Direction.NORTH_WEST, new Cell());
-        northWestCell.getNeighbors().get(Direction.NORTH_WEST).getNeighbors().
-                put(Direction.SOUTH_EAST, northWestCell);
-
-        northEastCell.getNeighbors().put(Direction.NORTH_EAST, new Cell());
-        northEastCell.getNeighbors().get(Direction.NORTH_EAST).getNeighbors().
-                put(Direction.SOUTH_WEST, northEastCell);
-
-        southWestCell.getNeighbors().put(Direction.SOUTH_WEST, new Cell());
-        southWestCell.getNeighbors().get(Direction.SOUTH_WEST).getNeighbors().
-                put(Direction.NORTH_EAST, southWestCell);
-
-        southEastCell.getNeighbors().put(Direction.SOUTH_EAST, new Cell());
-        southEastCell.getNeighbors().get(Direction.SOUTH_EAST).getNeighbors().
-                put(Direction.NORTH_WEST, southEastCell);
     }
 }
