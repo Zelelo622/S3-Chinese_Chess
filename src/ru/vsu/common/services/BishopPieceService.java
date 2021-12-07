@@ -46,6 +46,11 @@ public class BishopPieceService implements IPieceService {
 
     private boolean isMoveAvailable(Game game, Cell testedCell) {
         if(testedCell != null) {
+            for (int i = 0; i < game.getBorderCells().size(); i++) {
+                if (testedCell == game.getBorderCells().get(i)) {
+                    return false;
+                }
+            }
             return game.getCellToPieceMap().get(testedCell) == null;
         }
         return false;

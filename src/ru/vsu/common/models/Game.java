@@ -10,6 +10,15 @@ public class Game {
     private Map<Piece, Player> pieceToPlayerMap = new LinkedHashMap<>();
     private List<Step> steps = new ArrayList<>();
     private Queue<Player> players = new LinkedList<>();
+    private List<Cell> borderCells = new ArrayList<>();
+
+    public List<Cell> getBorderCells() {
+        return borderCells;
+    }
+
+    public void setBorderCells(List<Cell> borderCells) {
+        this.borderCells = borderCells;
+    }
 
     public Map<Piece, Cell> getPieceToCellMap() {
         return pieceToCellMap;

@@ -59,6 +59,12 @@ public class GameService {
         return graph;
     }
 
+    public void initBorderCells2(List<List<Cell>> board, Game game ) {
+        List<Cell> list = game.getBorderCells();
+        list.addAll(board.get(4));
+        list.addAll(board.get(5));
+    }
+
     public void initPieces(List<List<Cell>> board, Game game, Player firstPlayer, Player secondPlayer) {
         List<PieceType> pieces =
                 Arrays.asList(PieceType.ROOK, PieceType.KNIGHT, PieceType.BISHOP, PieceType.GUARD);

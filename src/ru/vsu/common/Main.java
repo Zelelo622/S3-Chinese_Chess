@@ -21,11 +21,13 @@ public class Main {
         Player player2 = new Player("Геннадий");
         GameService gs = new GameService();
         List<List<Cell>> board = gs.initBoard();
+        gs.initBorderCells2(board, game);
+//        game.setBorderCells(gs.initBorderCells(board));
         gs.initPieces(board, game, player1, player2);
         BishopPieceService bishopPieceService = new BishopPieceService();
         Set<Piece> pieces = game.getPlayerToPieceMap().get(player2);
         List<Piece> pieces1 = new ArrayList<>(pieces);
-        List<Cell> testList = bishopPieceService.getPossibleMoves(game, pieces1.get(8));
+        List<Cell> testList = bishopPieceService.getPossibleMoves(game, pieces1.get(5));
     }
 
     private static void printBoard(List<List<Cell>> board, Game game) {
