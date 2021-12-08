@@ -20,6 +20,11 @@ public class KnightPieceService implements IPieceService {
         return possibleMoves;
     }
 
+    @Override
+    public Step doMove(Game game, Piece piece, Cell cell) {
+        return null;
+    }
+
     private List<Cell> findKnightMoves(Game game, Piece piece, List<Direction> directionsList) {
         List<Cell> possibleMoves = new ArrayList<>();
         Direction dir;
@@ -61,10 +66,5 @@ public class KnightPieceService implements IPieceService {
                             (game.getCellToPieceMap().get(testedCell).getPieceColor() != piece.getPieceColor())));
         }
         return false;
-    }
-
-    @Override
-    public Step doMove(Game game) {
-        return null;
     }
 }

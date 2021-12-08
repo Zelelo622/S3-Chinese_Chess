@@ -20,6 +20,11 @@ public class BishopPieceService implements IPieceService {
         return possibleMoves;
     }
 
+    @Override
+    public Step doMove(Game game, Piece piece, Cell cell) {
+        return null;
+    }
+
     private List<Cell> findBishopSteps(Game game, Piece piece, List<Direction> directions) {
         List<Cell> possibleMoves = new ArrayList<>();
         Cell pieceCell = game.getPieceToCellMap().get(piece);
@@ -56,10 +61,5 @@ public class BishopPieceService implements IPieceService {
                             (game.getCellToPieceMap().get(testedCell).getPieceColor() != piece.getPieceColor()));
         }
         return false;
-    }
-
-    @Override
-    public Step doMove(Game game) {
-        return null;
     }
 }

@@ -19,6 +19,11 @@ public class RookPieceService implements IPieceService {
         return possibleMoves;
     }
 
+    @Override
+    public Step doMove(Game game, Piece piece, Cell cell) {
+        return null;
+    }
+
     private List<Cell> findRookStep(Game game, Piece piece, List<Direction> directions) {
         List<Cell> possibleMoves = new ArrayList<>();
         Cell pieceCell = game.getPieceToCellMap().get(piece);
@@ -52,10 +57,5 @@ public class RookPieceService implements IPieceService {
     private boolean stopsAfterKill(Game game, Piece piece, Cell testedCell) {
             return ((game.getCellToPieceMap().get(testedCell) != null) &&
                     (game.getCellToPieceMap().get(testedCell).getPieceColor() != piece.getPieceColor()));
-    }
-
-    @Override
-    public Step doMove(Game game) {
-        return null;
     }
 }

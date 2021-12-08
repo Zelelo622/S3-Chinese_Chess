@@ -14,17 +14,23 @@ public class Main {
 
     public static void main(String[] args) {
         Game game = new Game();
-        Player player1 = new Player("Василий");
-        Player player2 = new Player("Геннадий");
+        Player player1 = new Player("Игрок Белый");
+        Player player2 = new Player("Игрок Черный");
         GameService gs = new GameService();
         List<List<Cell>> board = gs.initBoard();
         gs.initRiverCells(board, game);
         gs.initKingBorderCells(board, game);
         gs.initPieces(board, game, player1, player2);
-        KnightPieceService rookPieceService = new KnightPieceService();
+        PawnPieceService pawnPieceService = new PawnPieceService();
+        KnightPieceService knightPieceService = new KnightPieceService();
+        BishopPieceService bishopPieceService = new BishopPieceService();
+        RookPieceService rookPieceService = new RookPieceService();
+        CannonPieceService cannonPieceService = new CannonPieceService();
+        KingPieceService kingPieceService = new KingPieceService();
+        GuardPieceService guardPieceService = new GuardPieceService();
         Set<Piece> pieces = game.getPlayerToPieceMap().get(player2);
         List<Piece> pieces1 = new ArrayList<>(pieces);
-        List<Cell> testList = rookPieceService.getPossibleMoves(game, pieces1.get(10));
+        List<Cell> testList = pawnPieceService.getPossibleMoves(game, pieces1.get(0));
     }
 
     private static void printBoard(List<List<Cell>> board, Game game) {

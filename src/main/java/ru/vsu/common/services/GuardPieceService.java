@@ -19,6 +19,11 @@ public class GuardPieceService implements IPieceService {
         return possibleMoves;
     }
 
+    @Override
+    public Step doMove(Game game, Piece piece, Cell cell) {
+        return null;
+    }
+
     private List<Cell> findGuardStep(Game game, Piece piece, List<Direction> directions) {
         List<Cell> possibleMoves = new ArrayList<>();
         Cell pieceCell = game.getPieceToCellMap().get(piece);
@@ -52,10 +57,4 @@ public class GuardPieceService implements IPieceService {
         return ((game.getCellToPieceMap().get(testedCell) != null) &&
                 (game.getCellToPieceMap().get(testedCell).getPieceColor() != piece.getPieceColor()));
     }
-
-    @Override
-    public Step doMove(Game game) {
-        return null;
-    }
-
 }

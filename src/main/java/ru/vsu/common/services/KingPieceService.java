@@ -20,6 +20,11 @@ public class KingPieceService implements IPieceService {
         return possibleMoves;
     }
 
+    @Override
+    public Step doMove(Game game, Piece piece, Cell cell) {
+        return null;
+    }
+
     private List<Cell> findKingStep(Game game, Piece piece, List<Direction> directions) {
         List<Cell> possibleMoves = new ArrayList<>();
         Cell pieceCell = game.getPieceToCellMap().get(piece);
@@ -47,10 +52,4 @@ public class KingPieceService implements IPieceService {
         }
         return false;
     }
-
-    @Override
-    public Step doMove(Game game) {
-        return null;
-    }
-
 }
