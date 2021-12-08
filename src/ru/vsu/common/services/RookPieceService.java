@@ -32,7 +32,7 @@ public class RookPieceService implements IPieceService {
                 possibleMoves.add(nextCell);
                 currCell = nextCell;
                 nextCell = currCell.getNeighbors().get(direction);
-                if (isMoveAvailable(game, piece, nextCell) && stopsAfterKill(game, piece, nextCell)) {
+                if (isMoveAvailable(game, piece, currCell) && stopsAfterKill(game, piece, currCell)) {
                     break;
                 }
             }

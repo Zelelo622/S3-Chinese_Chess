@@ -59,10 +59,24 @@ public class GameService {
         return graph;
     }
 
-    public void initBorderCells(List<List<Cell>> board, Game game ) {
-        List<Cell> list = game.getBorderCells();
+    public void initRiverCells(List<List<Cell>> board, Game game) {
+        List<Cell> list = game.getRiverCells();
         list.addAll(board.get(4));
         list.addAll(board.get(5));
+    }
+
+    public void initKingBorderCells(List<List<Cell>> board, Game game) {
+        List<Cell> list = game.getKingBorderCells();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 3; j < 6; j++) {
+                list.add(board.get(i).get(j));
+            }
+        }
+        for (int i = 7; i < 10; i++) {
+            for (int j = 3; j < 6; j++) {
+                list.add(board.get(i).get(j));
+            }
+        }
     }
 
     public void initPieces(List<List<Cell>> board, Game game, Player firstPlayer, Player secondPlayer) {
@@ -164,12 +178,12 @@ public class GameService {
     ) {
 
         /**/
-        Piece rook = new Piece(PieceType.ROOK, ColorEnum.BLACK);
-        game.getPieceToCellMap().put(rook, board.get(4).get(2));
-        game.getCellToPieceMap().put(board.get(4).get(2), rook);
-        playerPieces.add(rook);
-        game.getPlayerToPieceMap().put(player, playerPieces);
-        game.getPieceToPlayerMap().put(rook, player);
+//        Piece rook = new Piece(PieceType.ROOK, ColorEnum.BLACK);
+//        game.getPieceToCellMap().put(rook, board.get(4).get(0));
+//        game.getCellToPieceMap().put(board.get(4).get(0), rook);
+//        playerPieces.add(rook);
+//        game.getPlayerToPieceMap().put(player, playerPieces);
+//        game.getPieceToPlayerMap().put(rook, player);
         /**/
         Piece cannon = new Piece(PieceType.CANNON, ColorEnum.BLACK);
         game.getPieceToCellMap().put(cannon, board.get(2).get(7));

@@ -30,7 +30,6 @@ public class PawnPieceService implements IPieceService {
         Cell nextCell = currentCell.getNeighbors().get(direction);
         Cell nextLeftCell = currentCell.getNeighbors().get(Direction.WEST);
         Cell nextRightCell = currentCell.getNeighbors().get(Direction.EAST);
-
         if(isMoveAvailable(game, nextCell)) {
             availableCell.add(nextCell);
         }
@@ -49,14 +48,6 @@ public class PawnPieceService implements IPieceService {
         } else {
             return Direction.NORTH;
         }
-    }
-
-    private boolean isAttackAvailable(Game game, Piece piece, Cell testedCell) {
-        if (testedCell != null) {
-            return (game.getCellToPieceMap().get(testedCell) != null) &&
-                    (game.getCellToPieceMap().get(testedCell).getPieceColor() != piece.getPieceColor());
-        }
-        return false;
     }
 
     private boolean isMoveAvailable(Game game, Cell testedCell) {

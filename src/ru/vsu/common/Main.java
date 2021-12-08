@@ -18,12 +18,13 @@ public class Main {
         Player player2 = new Player("Геннадий");
         GameService gs = new GameService();
         List<List<Cell>> board = gs.initBoard();
-        gs.initBorderCells(board, game);
+        gs.initRiverCells(board, game);
+        gs.initKingBorderCells(board, game);
         gs.initPieces(board, game, player1, player2);
-        RookPieceService rookPieceService = new RookPieceService();
+        KingPieceService rookPieceService = new KingPieceService();
         Set<Piece> pieces = game.getPlayerToPieceMap().get(player2);
         List<Piece> pieces1 = new ArrayList<>(pieces);
-        List<Cell> testList = rookPieceService.getPossibleMoves(game, pieces1.get(10));
+        List<Cell> testList = rookPieceService.getPossibleMoves(game, pieces1.get(11));
     }
 
     private static void printBoard(List<List<Cell>> board, Game game) {

@@ -10,14 +10,23 @@ public class Game {
     private Map<Piece, Player> pieceToPlayerMap = new LinkedHashMap<>();
     private List<Step> steps = new ArrayList<>();
     private Queue<Player> players = new LinkedList<>();
-    private List<Cell> borderCells = new ArrayList<>();
+    private List<Cell> riverCells = new ArrayList<>();
+    private List<Cell> kingBorderCells = new ArrayList<>();
 
-    public List<Cell> getBorderCells() {
-        return borderCells;
+    public List<Cell> getKingBorderCells() {
+        return kingBorderCells;
     }
 
-    public void setBorderCells(List<Cell> borderCells) {
-        this.borderCells = borderCells;
+    public void setKingBorderCells(List<Cell> kingBorderCells) {
+        this.kingBorderCells = kingBorderCells;
+    }
+
+    public List<Cell> getRiverCells() {
+        return riverCells;
+    }
+
+    public void setRiverCells(List<Cell> riverCells) {
+        this.riverCells = riverCells;
     }
 
     public Map<Piece, Cell> getPieceToCellMap() {
