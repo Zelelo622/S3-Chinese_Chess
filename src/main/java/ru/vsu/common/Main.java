@@ -24,7 +24,7 @@ public class Main {
         KnightPieceService rookPieceService = new KnightPieceService();
         Set<Piece> pieces = game.getPlayerToPieceMap().get(player2);
         List<Piece> pieces1 = new ArrayList<>(pieces);
-        List<Cell> testList = rookPieceService.getPossibleMoves(game, pieces1.get(7));
+        List<Cell> testList = rookPieceService.getPossibleMoves(game, pieces1.get(10));
     }
 
     private static void printBoard(List<List<Cell>> board, Game game) {

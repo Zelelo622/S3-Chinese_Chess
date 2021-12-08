@@ -178,9 +178,9 @@ public class GameService {
     ) {
 
         /**/
-//        Piece rook = new Piece(PieceType.PAWN, ColorEnum.BLACK);
-//        game.getPieceToCellMap().put(rook, board.get(5).get(2));
-//        game.getCellToPieceMap().put(board.get(5).get(2), rook);
+//        Piece rook = new Piece(PieceType.KNIGHT, ColorEnum.BLACK);
+//        game.getPieceToCellMap().put(rook, board.get(4).get(1));
+//        game.getCellToPieceMap().put(board.get(4).get(1), rook);
 //        playerPieces.add(rook);
 //        game.getPlayerToPieceMap().put(player, playerPieces);
 //        game.getPieceToPlayerMap().put(rook, player);

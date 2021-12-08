@@ -32,8 +32,7 @@ public class KnightPieceService implements IPieceService {
             dir = directionsList.get(i);
             currentCell = receivedCell;
             nextCell = currentCell.getNeighbors().get(dir);
-            if (nextCell != null && nextCell) {
-                //tempCell = nextCell;
+            if (nextCell != null) {
                 currentCell = nextCell;
                 nextCell = currentCell.getNeighbors().get(dir);
                 if (nextCell != null) {
