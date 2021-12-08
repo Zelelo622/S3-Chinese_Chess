@@ -31,6 +31,7 @@ public class Main {
         Set<Piece> pieces = game.getPlayerToPieceMap().get(player2);
         List<Piece> pieces1 = new ArrayList<>(pieces);
         List<Cell> testList = pawnPieceService.getPossibleMoves(game, pieces1.get(0));
+        System.out.println("Hello");
     }
 
     private static void printBoard(List<List<Cell>> board, Game game) {
