@@ -12,7 +12,6 @@ public class PawnPieceService implements IPieceService {
     public List<Cell> getPossibleMoves(Game game, Piece piece) {
         Direction direction = getDirection(piece);
         List<Cell> possibleMoves = new ArrayList<>(findPawnStep(game, piece, direction));
-        Set<Cell> beatMoves = new LinkedHashSet<>();
         return possibleMoves;
     }
 

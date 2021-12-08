@@ -14,9 +14,4 @@ public class Cell {
     public Map<Direction, Cell> getNeighbors() {
         return neighbors;
     }
-
-    @Override
-    public String toString() {
-        return ".";
-    }
 }

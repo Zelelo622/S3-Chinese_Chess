@@ -1,9 +1,6 @@
 package ru.vsu.common.services;
 
-import ru.vsu.common.models.Cell;
-import ru.vsu.common.models.Game;
-import ru.vsu.common.models.Piece;
-import ru.vsu.common.models.Step;
+import ru.vsu.common.models.*;
 import ru.vsu.common.models.enums.Direction;
 
 import java.util.*;
@@ -21,8 +18,36 @@ public class KnightPieceService implements IPieceService {
     }
 
     @Override
-    public Step doMove(Game game, Piece piece, Cell cell) {
-        return null;
+    public Step doMove(Game game, Piece piece, Cell finCell) {
+        Step stepKnight = new Step();
+        Cell currCell = game.getPieceToCellMap().get(piece);
+        stepKnight.setPlayer(game.getPieceToPlayerMap().get(piece));
+        stepKnight.setStartCell(currCell);
+        stepKnight.setEndCell(finCell);
+        stepKnight.setPiece(piece);
+        if (isFinCellNotEmpty(game, finCell)) {
+            stepKnight.setKilledPiece(game.getCellToPieceMap().get(finCell));
+        }
+        game.getSteps().add(stepKnight);
+        changeOnBoardPlacement(game, piece, finCell, currCell);
+        return stepKnight;
+    }
+
+    private boolean isFinCellNotEmpty(Game game, Cell finCell) {
+        return game.getCellToPieceMap().get(finCell) != null;
+    }
+
+    private void changeOnBoardPlacement(Game game, Piece piece, Cell finCell, Cell currCell) {
+        Player rival;
+        Piece targetPiece;
+        game.getPieceToCellMap().replace(piece, finCell);
+        game.getCellToPieceMap().put(finCell, piece);
+        game.getCellToPieceMap().remove(currCell, piece);
+        if (isFinCellNotEmpty(game, finCell)) {
+            targetPiece = game.getCellToPieceMap().get(finCell);
+            rival = game.getPieceToPlayerMap().get(targetPiece);
+            game.getPlayerToPieceMap().get(rival).remove(targetPiece);
+        }
     }
 
     private List<Cell> findKnightMoves(Game game, Piece piece, List<Direction> directionsList) {

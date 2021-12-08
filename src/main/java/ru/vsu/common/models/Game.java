@@ -6,12 +6,31 @@ public class Game {
 
     private Map<Piece, Cell> pieceToCellMap = new LinkedHashMap<>();
     private Map<Cell, Piece> cellToPieceMap = new HashMap();
-    private Map<Player, Set<Piece>> PlayerToPieceMap = new HashMap();
+    private Map<Player, Set<Piece>> playerToPieceMap = new HashMap();
     private Map<Piece, Player> pieceToPlayerMap = new LinkedHashMap<>();
     private List<Step> steps = new ArrayList<>();
     private Queue<Player> players = new LinkedList<>();
     private List<Cell> riverCells = new ArrayList<>();
     private List<Cell> kingBorderCells = new ArrayList<>();
+
+    private Map<String, Cell> number2CellMap;
+    private Map<Cell, String> cellToNumberMap;
+
+    public Map<String, Cell> getNumber2CellMap() {
+        return number2CellMap;
+    }
+
+    public void setNumber2CellMap(Map<String, Cell> number2CellMap) {
+        this.number2CellMap = number2CellMap;
+    }
+
+    public Map<Cell, String> getCellToNumberMap() {
+        return cellToNumberMap;
+    }
+
+    public void setCellToNumberMap(Map<Cell, String> cellToNumberMap) {
+        this.cellToNumberMap = cellToNumberMap;
+    }
 
     public List<Cell> getKingBorderCells() {
         return kingBorderCells;
@@ -46,11 +65,11 @@ public class Game {
     }
 
     public Map<Player, Set<Piece>> getPlayerToPieceMap() {
-        return PlayerToPieceMap;
+        return playerToPieceMap;
     }
 
     public void setPlayerToPieceMap(Map<Player, Set<Piece>> playerToPieceMap) {
-        PlayerToPieceMap = playerToPieceMap;
+        this.playerToPieceMap = playerToPieceMap;
     }
 
     public Map<Piece, Player> getPieceToPlayerMap() {
