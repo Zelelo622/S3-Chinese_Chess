@@ -154,8 +154,8 @@ public class GameService {
             Player player
     ) {
         Piece cannon = new Piece(PieceType.CANNON, ColorEnum.BLACK);
-        game.getPieceToCellMap().put(cannon, board.get(2).get(2));
-        game.getCellToPieceMap().put(board.get(2).get(2), cannon);
+        game.getPieceToCellMap().put(cannon, board.get(2).get(1));
+        game.getCellToPieceMap().put(board.get(2).get(1), cannon);
         playerPieces.add(cannon);
         game.getPlayerToPieceMap().put(player, playerPieces);
         game.getPieceToPlayerMap().put(cannon, player);
@@ -178,9 +178,9 @@ public class GameService {
     ) {
 
         /**/
-//        Piece rook = new Piece(PieceType.ROOK, ColorEnum.BLACK);
-//        game.getPieceToCellMap().put(rook, board.get(4).get(0));
-//        game.getCellToPieceMap().put(board.get(4).get(0), rook);
+//        Piece rook = new Piece(PieceType.PAWN, ColorEnum.BLACK);
+//        game.getPieceToCellMap().put(rook, board.get(5).get(2));
+//        game.getCellToPieceMap().put(board.get(5).get(2), rook);
 //        playerPieces.add(rook);
 //        game.getPlayerToPieceMap().put(player, playerPieces);
 //        game.getPieceToPlayerMap().put(rook, player);
@@ -217,8 +217,8 @@ public class GameService {
             Player player
     ) {
         Piece cannon = new Piece(PieceType.CANNON, ColorEnum.WHITE);
-        game.getPieceToCellMap().put(cannon, board.get(7).get(2));
-        game.getCellToPieceMap().put(board.get(7).get(2), cannon);
+        game.getPieceToCellMap().put(cannon, board.get(7).get(1));
+        game.getCellToPieceMap().put(board.get(7).get(1), cannon);
         playerPieces.add(cannon);
         game.getPlayerToPieceMap().put(player, playerPieces);
         game.getPieceToPlayerMap().put(cannon, player);

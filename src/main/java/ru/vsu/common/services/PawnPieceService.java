@@ -30,29 +30,31 @@ public class PawnPieceService implements IPieceService {
         Cell nextCell = currentCell.getNeighbors().get(direction);
         Cell nextLeftCell = currentCell.getNeighbors().get(Direction.WEST);
         Cell nextRightCell = currentCell.getNeighbors().get(Direction.EAST);
-        if(isMoveAvailable(game, nextCell)) {
+        if (isMoveAvailable(game, piece, nextCell)) {
             availableCell.add(nextCell);
         }
-        if (isMoveAvailable(game, nextLeftCell)) {
+        if (isMoveAvailable(game, piece, nextLeftCell)) {
             availableCell.add(nextLeftCell);
         }
-        if (isMoveAvailable(game, nextRightCell)) {
+        if (isMoveAvailable(game, piece, nextRightCell)) {
             availableCell.add(nextRightCell);
         }
         return availableCell;
     }
 
     private Direction getDirection(Piece piece) {
-        if(piece.getPieceColor() == ColorEnum.BLACK) {
+        if (piece.getPieceColor() == ColorEnum.BLACK) {
             return Direction.SOUTH;
         } else {
             return Direction.NORTH;
         }
     }
 
-    private boolean isMoveAvailable(Game game, Cell testedCell) {
-        if(testedCell != null) {
-            return game.getCellToPieceMap().get(testedCell) == null;
+    private boolean isMoveAvailable(Game game, Piece piece, Cell testedCell) {
+        if (testedCell != null) {
+            return ((game.getCellToPieceMap().get(testedCell) == null) ||
+                    (game.getCellToPieceMap().get(testedCell) != null) &&
+                            (game.getCellToPieceMap().get(testedCell).getPieceColor() != piece.getPieceColor()));
         }
         return false;
     }

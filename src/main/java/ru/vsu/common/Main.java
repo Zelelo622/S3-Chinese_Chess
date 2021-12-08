@@ -21,10 +21,10 @@ public class Main {
         gs.initRiverCells(board, game);
         gs.initKingBorderCells(board, game);
         gs.initPieces(board, game, player1, player2);
-        KingPieceService rookPieceService = new KingPieceService();
+        KnightPieceService rookPieceService = new KnightPieceService();
         Set<Piece> pieces = game.getPlayerToPieceMap().get(player2);
         List<Piece> pieces1 = new ArrayList<>(pieces);
-        List<Cell> testList = rookPieceService.getPossibleMoves(game, pieces1.get(11));
+        List<Cell> testList = rookPieceService.getPossibleMoves(game, pieces1.get(7));
     }
 
     private static void printBoard(List<List<Cell>> board, Game game) {

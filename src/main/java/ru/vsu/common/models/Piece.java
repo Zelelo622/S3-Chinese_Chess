@@ -1,5 +1,6 @@
 package ru.vsu.common.models;
 
+
 import ru.vsu.common.models.enums.ColorEnum;
 import ru.vsu.common.models.enums.PieceType;
 
