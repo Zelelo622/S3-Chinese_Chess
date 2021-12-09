@@ -43,34 +43,6 @@ public class GuardPieceService implements IPieceService {
 
     @Override
     public Step doMove(Game game, Piece piece, Cell finCell) {
-        Step stepGuard = new Step();
-        Cell currCell = game.getPieceToCellMap().get(piece);
-        stepGuard.setPlayer(game.getPieceToPlayerMap().get(piece));
-        stepGuard.setStartCell(currCell);
-        stepGuard.setEndCell(finCell);
-        stepGuard.setPiece(piece);
-        if (isFinCellNotEmpty(game, finCell)) {
-            stepGuard.setKilledPiece(game.getCellToPieceMap().get(finCell));
-        }
-        game.getSteps().add(stepGuard);
-        changeOnBoardPlacement(game, piece, finCell, currCell);
-        return stepGuard;
-    }
-
-    private boolean isFinCellNotEmpty(Game game, Cell finCell) {
-        return game.getCellToPieceMap().get(finCell) != null;
-    }
-
-    private void changeOnBoardPlacement(Game game, Piece piece, Cell finCell, Cell currCell) {
-        Player rival;
-        Piece targetPiece;
-        game.getPieceToCellMap().replace(piece, finCell);
-        game.getCellToPieceMap().put(finCell, piece);
-        game.getCellToPieceMap().remove(currCell, piece);
-        if (isFinCellNotEmpty(game, finCell)) {
-            targetPiece = game.getCellToPieceMap().get(finCell);
-            rival = game.getPieceToPlayerMap().get(targetPiece);
-            game.getPlayerToPieceMap().get(rival).remove(targetPiece);
-        }
+        return null;
     }
 }
