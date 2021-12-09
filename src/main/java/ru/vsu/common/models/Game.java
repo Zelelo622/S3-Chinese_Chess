@@ -13,25 +13,6 @@ public class Game {
     private List<Cell> riverCells = new ArrayList<>();
     private List<Cell> kingBorderCells = new ArrayList<>();
 
-    private Map<String, Cell> number2CellMap;
-    private Map<Cell, String> cellToNumberMap;
-
-    public Map<String, Cell> getNumber2CellMap() {
-        return number2CellMap;
-    }
-
-    public void setNumber2CellMap(Map<String, Cell> number2CellMap) {
-        this.number2CellMap = number2CellMap;
-    }
-
-    public Map<Cell, String> getCellToNumberMap() {
-        return cellToNumberMap;
-    }
-
-    public void setCellToNumberMap(Map<Cell, String> cellToNumberMap) {
-        this.cellToNumberMap = cellToNumberMap;
-    }
-
     public List<Cell> getKingBorderCells() {
         return kingBorderCells;
     }
@@ -86,10 +67,6 @@ public class Game {
 
     public void setSteps(List<Step> steps) {
         this.steps = steps;
-    }
-
-    public Queue<Player> getPlayers() {
-        return players;
     }
 
     public void setPlayers(Queue<Player> players) {

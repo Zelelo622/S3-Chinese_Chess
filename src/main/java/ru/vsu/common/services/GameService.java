@@ -12,26 +12,6 @@ public class GameService {
     public static final Integer BOARD_COL = 9;
     public static final Integer BOARD_ROW = 10;
 
-    private Map<Piece, IPieceService> piece2ServiceMap;
-
-    public GameService(Map<Piece, IPieceService> pieceServiceMap) {
-        this.piece2ServiceMap = piece2ServiceMap;
-    }
-
-    public Game initGame() {
-        Game game = new Game();
-        Player firstPlayer = new Player("Игрок1");
-        Player secondPlayer = new Player("Игрок2");
-        List<List<Cell>> gameBoard = initBoard();
-        initPieces(gameBoard, game, firstPlayer, secondPlayer);
-        return game;
-    }
-
-    public void startGameProcess(Game game) {
-        Queue<Player> players = new ArrayDeque<>();
-
-    }
-
     public List<List<Cell>> initBoard() {
         List<List<Cell>> graph = new ArrayList<>();
 

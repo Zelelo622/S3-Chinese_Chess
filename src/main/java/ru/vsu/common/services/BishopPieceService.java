@@ -9,44 +9,9 @@ public class BishopPieceService implements IPieceService {
 
     @Override
     public List<Cell> getPossibleMoves(Game game, Piece piece) {
-        List<Cell> possibleMoves = new ArrayList<>();
         List<Direction> directions = Arrays.asList(Direction.NORTH_EAST, Direction.NORTH_WEST,
                 Direction.SOUTH_EAST, Direction.SOUTH_WEST);
-        possibleMoves.addAll(findBishopSteps(game, piece, directions));
-        return possibleMoves;
-    }
-
-    @Override
-    public Step doMove(Game game, Piece piece, Cell finCell) {
-        Step stepBishop = new Step();
-        Cell currCell = game.getPieceToCellMap().get(piece);
-        stepBishop.setPlayer(game.getPieceToPlayerMap().get(piece));
-        stepBishop.setStartCell(currCell);
-        stepBishop.setEndCell(finCell);
-        stepBishop.setPiece(piece);
-        if (isFinCellNotEmpty(game, finCell)) {
-            stepBishop.setKilledPiece(game.getCellToPieceMap().get(finCell));
-        }
-        game.getSteps().add(stepBishop);
-        changeOnBoardPlacement(game, piece, finCell, currCell);
-        return stepBishop;
-    }
-
-    private boolean isFinCellNotEmpty(Game game, Cell finCell) {
-        return game.getCellToPieceMap().get(finCell) != null;
-    }
-
-    private void changeOnBoardPlacement(Game game, Piece piece, Cell finCell, Cell currCell) {
-        Player rival;
-        Piece targetPiece;
-        game.getPieceToCellMap().replace(piece, finCell);
-        game.getCellToPieceMap().put(finCell, piece);
-        game.getCellToPieceMap().remove(currCell, piece);
-        if (isFinCellNotEmpty(game, finCell)) {
-            targetPiece = game.getCellToPieceMap().get(finCell);
-            rival = game.getPieceToPlayerMap().get(targetPiece);
-            game.getPlayerToPieceMap().get(rival).remove(targetPiece);
-        }
+        return new ArrayList<>(findBishopSteps(game, piece, directions));
     }
 
     private List<Cell> findBishopSteps(Game game, Piece piece, List<Direction> directions) {
@@ -85,5 +50,38 @@ public class BishopPieceService implements IPieceService {
                             (game.getCellToPieceMap().get(testedCell).getPieceColor() != piece.getPieceColor()));
         }
         return false;
+    }
+
+    @Override
+    public Step doMove(Game game, Piece piece, Cell finCell) {
+        Step stepBishop = new Step();
+        Cell currCell = game.getPieceToCellMap().get(piece);
+        stepBishop.setPlayer(game.getPieceToPlayerMap().get(piece));
+        stepBishop.setStartCell(currCell);
+        stepBishop.setEndCell(finCell);
+        stepBishop.setPiece(piece);
+        if (isFinCellNotEmpty(game, finCell)) {
+            stepBishop.setKilledPiece(game.getCellToPieceMap().get(finCell));
+        }
+        game.getSteps().add(stepBishop);
+        changeOnBoardPlacement(game, piece, finCell, currCell);
+        return stepBishop;
+    }
+
+    private boolean isFinCellNotEmpty(Game game, Cell finCell) {
+        return game.getCellToPieceMap().get(finCell) != null;
+    }
+
+    private void changeOnBoardPlacement(Game game, Piece piece, Cell finCell, Cell currCell) {
+        Player rival;
+        Piece targetPiece;
+        game.getPieceToCellMap().replace(piece, finCell);
+        game.getCellToPieceMap().put(finCell, piece);
+        game.getCellToPieceMap().remove(currCell, piece);
+        if (isFinCellNotEmpty(game, finCell)) {
+            targetPiece = game.getCellToPieceMap().get(finCell);
+            rival = game.getPieceToPlayerMap().get(targetPiece);
+            game.getPlayerToPieceMap().get(rival).remove(targetPiece);
+        }
     }
 }

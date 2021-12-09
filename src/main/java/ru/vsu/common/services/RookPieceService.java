@@ -9,43 +9,8 @@ public class RookPieceService implements IPieceService {
 
     @Override
     public List<Cell> getPossibleMoves(Game game, Piece piece) {
-        List<Cell> possibleMoves = new ArrayList<>();
         List<Direction> directions = Arrays.asList(Direction.NORTH, Direction.EAST, Direction.WEST, Direction.SOUTH);
-        possibleMoves.addAll(findRookStep(game, piece, directions));
-        return possibleMoves;
-    }
-
-    @Override
-    public Step doMove(Game game, Piece piece, Cell finCell) {
-        Step stepRook = new Step();
-        Cell currCell = game.getPieceToCellMap().get(piece);
-        stepRook.setPlayer(game.getPieceToPlayerMap().get(piece));
-        stepRook.setStartCell(currCell);
-        stepRook.setEndCell(finCell);
-        stepRook.setPiece(piece);
-        if (isFinCellNotEmpty(game, finCell)) {
-            stepRook.setKilledPiece(game.getCellToPieceMap().get(finCell));
-        }
-        game.getSteps().add(stepRook);
-        changeOnBoardPlacement(game, piece, finCell, currCell);
-        return stepRook;
-    }
-
-    private boolean isFinCellNotEmpty(Game game, Cell finCell) {
-        return game.getCellToPieceMap().get(finCell) != null;
-    }
-
-    private void changeOnBoardPlacement(Game game, Piece piece, Cell finCell, Cell currCell) {
-        Player rival;
-        Piece targetPiece;
-        game.getPieceToCellMap().replace(piece, finCell);
-        game.getCellToPieceMap().put(finCell, piece);
-        game.getCellToPieceMap().remove(currCell, piece);
-        if (isFinCellNotEmpty(game, finCell)) {
-            targetPiece = game.getCellToPieceMap().get(finCell);
-            rival = game.getPieceToPlayerMap().get(targetPiece);
-            game.getPlayerToPieceMap().get(rival).remove(targetPiece);
-        }
+        return new ArrayList<>(findRookStep(game, piece, directions));
     }
 
     private List<Cell> findRookStep(Game game, Piece piece, List<Direction> directions) {
@@ -81,5 +46,38 @@ public class RookPieceService implements IPieceService {
     private boolean stopsAfterKill(Game game, Piece piece, Cell testedCell) {
             return ((game.getCellToPieceMap().get(testedCell) != null) &&
                     (game.getCellToPieceMap().get(testedCell).getPieceColor() != piece.getPieceColor()));
+    }
+
+    @Override
+    public Step doMove(Game game, Piece piece, Cell finCell) {
+        Step stepRook = new Step();
+        Cell currCell = game.getPieceToCellMap().get(piece);
+        stepRook.setPlayer(game.getPieceToPlayerMap().get(piece));
+        stepRook.setStartCell(currCell);
+        stepRook.setEndCell(finCell);
+        stepRook.setPiece(piece);
+        if (isFinCellNotEmpty(game, finCell)) {
+            stepRook.setKilledPiece(game.getCellToPieceMap().get(finCell));
+        }
+        game.getSteps().add(stepRook);
+        changeOnBoardPlacement(game, piece, finCell, currCell);
+        return stepRook;
+    }
+
+    private boolean isFinCellNotEmpty(Game game, Cell finCell) {
+        return game.getCellToPieceMap().get(finCell) != null;
+    }
+
+    private void changeOnBoardPlacement(Game game, Piece piece, Cell finCell, Cell currCell) {
+        Player rival;
+        Piece targetPiece;
+        game.getPieceToCellMap().replace(piece, finCell);
+        game.getCellToPieceMap().put(finCell, piece);
+        game.getCellToPieceMap().remove(currCell, piece);
+        if (isFinCellNotEmpty(game, finCell)) {
+            targetPiece = game.getCellToPieceMap().get(finCell);
+            rival = game.getPieceToPlayerMap().get(targetPiece);
+            game.getPlayerToPieceMap().get(rival).remove(targetPiece);
+        }
     }
 }

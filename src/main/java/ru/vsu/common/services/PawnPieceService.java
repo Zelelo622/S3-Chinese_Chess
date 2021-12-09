@@ -11,41 +11,7 @@ public class PawnPieceService implements IPieceService {
     @Override
     public List<Cell> getPossibleMoves(Game game, Piece piece) {
         Direction direction = getDirection(piece);
-        List<Cell> possibleMoves = new ArrayList<>(findPawnStep(game, piece, direction));
-        return possibleMoves;
-    }
-
-    @Override
-    public Step doMove(Game game, Piece piece, Cell finCell) {
-        Step stepPawn = new Step();
-        Cell currCell = game.getPieceToCellMap().get(piece);
-        stepPawn.setPlayer(game.getPieceToPlayerMap().get(piece));
-        stepPawn.setStartCell(currCell);
-        stepPawn.setEndCell(finCell);
-        stepPawn.setPiece(piece);
-        if (isFinCellNotEmpty(game, finCell)) {
-            stepPawn.setKilledPiece(game.getCellToPieceMap().get(finCell));
-        }
-        game.getSteps().add(stepPawn);
-        changeOnBoardPlacement(game, piece, finCell, currCell);
-        return stepPawn;
-    }
-
-    private boolean isFinCellNotEmpty(Game game, Cell finCell) {
-        return game.getCellToPieceMap().get(finCell) != null;
-    }
-
-    private void changeOnBoardPlacement(Game game, Piece piece, Cell finCell, Cell currCell) {
-        Player rival;
-        Piece targetPiece;
-        game.getPieceToCellMap().replace(piece, finCell);
-        game.getCellToPieceMap().put(finCell, piece);
-        game.getCellToPieceMap().remove(currCell, piece);
-        if (isFinCellNotEmpty(game, finCell)) {
-            targetPiece = game.getCellToPieceMap().get(finCell);
-            rival = game.getPieceToPlayerMap().get(targetPiece);
-            game.getPlayerToPieceMap().get(rival).remove(targetPiece);
-        }
+        return new ArrayList<>(findPawnStep(game, piece, direction));
     }
 
     private List<Cell> findPawnStep(Game game, Piece piece, Direction direction) {
@@ -81,5 +47,38 @@ public class PawnPieceService implements IPieceService {
                             (game.getCellToPieceMap().get(testedCell).getPieceColor() != piece.getPieceColor()));
         }
         return false;
+    }
+
+    @Override
+    public Step doMove(Game game, Piece piece, Cell finCell) {
+        Step stepPawn = new Step();
+        Cell currCell = game.getPieceToCellMap().get(piece);
+        stepPawn.setPlayer(game.getPieceToPlayerMap().get(piece));
+        stepPawn.setStartCell(currCell);
+        stepPawn.setEndCell(finCell);
+        stepPawn.setPiece(piece);
+        if (isFinCellNotEmpty(game, finCell)) {
+            stepPawn.setKilledPiece(game.getCellToPieceMap().get(finCell));
+        }
+        game.getSteps().add(stepPawn);
+        changeOnBoardPlacement(game, piece, finCell, currCell);
+        return stepPawn;
+    }
+
+    private boolean isFinCellNotEmpty(Game game, Cell finCell) {
+        return game.getCellToPieceMap().get(finCell) != null;
+    }
+
+    private void changeOnBoardPlacement(Game game, Piece piece, Cell finCell, Cell currCell) {
+        Player rival;
+        Piece targetPiece;
+        game.getPieceToCellMap().replace(piece, finCell);
+        game.getCellToPieceMap().put(finCell, piece);
+        game.getCellToPieceMap().remove(currCell, piece);
+        if (isFinCellNotEmpty(game, finCell)) {
+            targetPiece = game.getCellToPieceMap().get(finCell);
+            rival = game.getPieceToPlayerMap().get(targetPiece);
+            game.getPlayerToPieceMap().get(rival).remove(targetPiece);
+        }
     }
 }
