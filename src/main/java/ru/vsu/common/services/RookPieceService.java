@@ -49,7 +49,36 @@ public class RookPieceService implements IPieceService {
     }
 
     @Override
-    public Step doMove(Game game, Piece piece, Cell finCell) {
-        return null;
+    public Step doMove(Game game, Piece piece, Cell targetCell) {
+        Step rookStep = new Step();
+        Cell currPosition = game.getPieceToCellMap().get(piece);
+
+        rookStep.setPlayer(game.getPieceToPlayerMap().get(piece));
+        rookStep.setStartCell(currPosition);
+        rookStep.setEndCell(targetCell);
+        rookStep.setPiece(piece);
+        if(isTargetCellNotEmpty(game, targetCell)) {
+            rookStep.setKilledPiece(game.getCellToPieceMap().get(targetCell));
+        }
+        game.getSteps().add(rookStep);
+        changeOnBoardPlacement(game, piece, targetCell, currPosition);
+        return rookStep;
+    }
+
+    private void changeOnBoardPlacement(Game game, Piece piece, Cell targetCell, Cell currPosition) {
+        Player rival;
+        Piece targetPiece;
+        if(isTargetCellNotEmpty(game, targetCell)) {
+            targetPiece = game.getCellToPieceMap().get(targetCell);
+            rival = game.getPieceToPlayerMap().get(targetPiece);
+            game.getPlayerToPieceMap().get(rival).remove(targetPiece);
+        }
+        game.getPieceToCellMap().put(piece, targetCell);
+        game.getCellToPieceMap().put(targetCell, piece);
+        game.getCellToPieceMap().remove(currPosition, piece);
+    }
+
+    public boolean isTargetCellNotEmpty(Game game, Cell targetCell) {
+        return game.getCellToPieceMap().get(targetCell) != null;
     }
 }

@@ -9,9 +9,28 @@ public class Game {
     private Map<Player, Set<Piece>> playerToPieceMap = new HashMap();
     private Map<Piece, Player> pieceToPlayerMap = new LinkedHashMap<>();
     private List<Step> steps = new ArrayList<>();
-    private Queue<Player> players = new LinkedList<>();
     private List<Cell> riverCells = new ArrayList<>();
     private List<Cell> kingBorderCells = new ArrayList<>();
+    private Map<String, Cell> stringCellMap = new HashMap<>();
+    private Map<Cell, String> cellToStringMap = new HashMap<>();
+
+
+    public Map<Cell, String> getCellToStringMap() {
+        return cellToStringMap;
+    }
+
+    public void setCellToStringMap(Map<Cell, String> cellToStringMap) {
+        this.cellToStringMap = cellToStringMap;
+    }
+
+    public Map<String, Cell> getStringCellMap() {
+        return stringCellMap;
+    }
+
+    public void setStringCellMap(Map<String, Cell> stringCellMap) {
+        this.stringCellMap = stringCellMap;
+    }
+
 
     public List<Cell> getKingBorderCells() {
         return kingBorderCells;

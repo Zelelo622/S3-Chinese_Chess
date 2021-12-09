@@ -1,5 +1,6 @@
 package ru.vsu.common.services;
 
+import ru.vsu.common.Main;
 import ru.vsu.common.models.*;
 import ru.vsu.common.models.enums.ColorEnum;
 import ru.vsu.common.models.enums.Direction;
@@ -12,6 +13,74 @@ public class GameService {
     public static final Integer BOARD_COL = 9;
     public static final Integer BOARD_ROW = 10;
 
+    private final Map<PieceType, IPieceService> pieceToServiceMap;
+
+    public GameService(Map<PieceType, IPieceService> pieceToServiceMap) {
+        this.pieceToServiceMap = pieceToServiceMap;
+    }
+
+    public Game initGame() {
+        Game game = new Game();
+        Player firstPlayer = new Player("Игрок белый");
+        Player secondPlayer = new Player("Игрок черный");
+        List<List<Cell>> gameBoard = initBoard();
+        initKingBorderCells(gameBoard, game);
+        initRiverCells(gameBoard, game);
+        initPieces(gameBoard, game, firstPlayer, secondPlayer);
+        return game;
+    }
+
+    public void startGameProcess(Game game) {
+        Queue<Player> players = new ArrayDeque<>();
+        game.getPlayerToPieceMap().forEach((key, value) -> players.add(key));
+        Set<Piece> pieces;
+        do {
+            Player currPlayer = players.poll();
+            players.add(currPlayer);
+            pieces = game.getPlayerToPieceMap().get(currPlayer);
+            List<Piece> piecesList = new ArrayList<>(pieces);
+
+            Random randomPiece = new Random();
+            Random randomStep = new Random();
+            Piece piece;
+            List<Cell> possibleMoves;
+            IPieceService pieceService;
+
+            do {
+                piece = piecesList.get(randomPiece.nextInt(piecesList.size()));
+                pieceService = pieceToServiceMap.get(piece.getPieceType());
+                possibleMoves = pieceService.getPossibleMoves(game, piece);
+            } while(possibleMoves.size() == 0);
+            pieceService.doMove(game, piece, possibleMoves.get(randomStep.nextInt(
+                    possibleMoves.size())));
+        } while(isKingAlive(pieces));
+    }
+
+    public void printGameResult(Game currGame) {
+        List<Step> gameSteps = currGame.getSteps();
+        Step currStep;
+        String currPlayer;
+        String piece;
+        String currCell;
+        String targetCell;
+        String killedPiece;
+        for (int i = 0; i < currGame.getSteps().size(); i++) {
+            currStep = gameSteps.get(i);
+            currPlayer = currStep.getPlayer().getName();
+            piece = currStep.getPiece().getPieceType().toString();
+            currCell = currStep.getStartCell().getConsoleCoordinates();
+            targetCell = currStep.getEndCell().getConsoleCoordinates();
+            if(currStep.getKilledPiece() != null) {
+                killedPiece = currStep.getKilledPiece().getPieceType().toString();
+            } else {
+                killedPiece = "Вражеских фигур не срублено";
+            }
+            System.out.println("Игрок: " + currPlayer + " ходит фигурой " + piece + " с ячейки " + currCell +
+                    " на ячейку " + targetCell);
+            System.out.println("В результате хода срублена фигура: " + killedPiece  + "\n");
+        }
+    }
+
     public List<List<Cell>> initBoard() {
         List<List<Cell>> graph = new ArrayList<>();
 
@@ -23,8 +92,9 @@ public class GameService {
         for (int i = 0; i < BOARD_ROW; i++) {
             prevCell = null;
             List<Cell> currRow = new ArrayList<>();
+            char column = 'a';
             for (int j = 0; j < BOARD_COL; j++) {
-                currCell = new Cell();
+                currCell = new Cell(Integer.toString(i) + Character.toString(column));
                 if (prevCell != null) {
                     currCell.getNeighbors().put(Direction.WEST, prevCell);
                     prevCell.getNeighbors().put(Direction.EAST, currCell);
@@ -258,5 +328,14 @@ public class GameService {
             game.getPlayerToPieceMap().put(player, playerPieces);
             game.getPieceToPlayerMap().put(piece, player);
         }
+    }
+
+    public static boolean isKingAlive(Set<Piece> pieces) {
+        for (Piece piece: pieces) {
+            if(piece.getPieceType().equals(PieceType.KING)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -6,9 +6,16 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Cell {
-    private final Map<Direction, Cell> neighbors = new LinkedHashMap<>();
 
-    public Cell() {
+    private final Map<Direction, Cell> neighbors = new LinkedHashMap<>();
+    private String consoleCoordinates;
+
+    public Cell(String consoleCoordinates) {
+        this.consoleCoordinates = consoleCoordinates;
+    }
+
+    public String getConsoleCoordinates() {
+        return consoleCoordinates;
     }
 
     public Map<Direction, Cell> getNeighbors() {
