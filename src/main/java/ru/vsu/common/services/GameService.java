@@ -31,6 +31,7 @@ public class GameService {
     }
 
     public void startGameProcess(Game game) {
+        int i = 0;
         Queue<Player> players = new ArrayDeque<>();
         game.getPlayerToPieceMap().forEach((key, value) -> players.add(key));
         Set<Piece> pieces;
@@ -53,6 +54,7 @@ public class GameService {
             } while(possibleMoves.size() == 0);
             pieceService.doMove(game, piece, possibleMoves.get(randomStep.nextInt(
                     possibleMoves.size())));
+            i++;
         } while(isKingAlive(pieces));
     }
 
@@ -93,7 +95,7 @@ public class GameService {
             prevCell = null;
             List<Cell> currRow = new ArrayList<>();
             char column = 'a';
-            for (int j = 0; j < BOARD_COL; j++) {
+            for (int j = 0; j < BOARD_COL; j++, column++) {
                 currCell = new Cell(Integer.toString(i) + Character.toString(column));
                 if (prevCell != null) {
                     currCell.getNeighbors().put(Direction.WEST, prevCell);

@@ -14,6 +14,29 @@ public class CannonPieceService implements IPieceService {
         return new ArrayList<>(findCannonStep(game, piece, directions));
     }
 
+//    private List<Cell> findCannonStep(Game game, Piece piece, List<Direction> directions) {
+//        List<Cell> possibleMoves = new ArrayList<>();
+//        Cell pieceCell = game.getPieceToCellMap().get(piece);
+//        Cell currCell;
+//        Cell nextCell;
+//        Direction direction;
+//        for (Direction value : directions) {
+//            direction = value;
+//            nextCell = pieceCell.getNeighbors().get(direction);
+//            while (isMoveAvailable(game, piece, nextCell)) {
+//                currCell = nextCell;
+//                nextCell = currCell.getNeighbors().get(direction);
+//                possibleMoves.add(currCell);
+//                if (isMoveAvailable(game, piece, currCell) && stopsAfterKill(game, piece, currCell)) {
+//                    possibleMoves.remove(currCell);
+//                    possibleMoves.add(nextCell);
+//                    break;
+//                }
+//            }
+//        }
+//        return possibleMoves;
+//    }
+
     private List<Cell> findCannonStep(Game game, Piece piece, List<Direction> directions) {
         List<Cell> possibleMoves = new ArrayList<>();
         Cell pieceCell = game.getPieceToCellMap().get(piece);
@@ -24,12 +47,10 @@ public class CannonPieceService implements IPieceService {
             direction = value;
             nextCell = pieceCell.getNeighbors().get(direction);
             while (isMoveAvailable(game, piece, nextCell)) {
+                possibleMoves.add(nextCell);
                 currCell = nextCell;
                 nextCell = currCell.getNeighbors().get(direction);
-                possibleMoves.add(currCell);
                 if (isMoveAvailable(game, piece, currCell) && stopsAfterKill(game, piece, currCell)) {
-                    possibleMoves.remove(currCell);
-                    possibleMoves.add(nextCell);
                     break;
                 }
             }
