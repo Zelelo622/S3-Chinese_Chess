@@ -68,8 +68,4 @@ public class Game {
     public void setSteps(List<Step> steps) {
         this.steps = steps;
     }
-
-    public void setPlayers(Queue<Player> players) {
-        this.players = players;
-    }
 }
