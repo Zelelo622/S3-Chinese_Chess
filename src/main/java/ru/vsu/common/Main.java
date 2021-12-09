@@ -29,7 +29,7 @@ public class Main {
 //        GuardPieceService guardPieceService = new GuardPieceService();
 //        Set<Piece> pieces = game.getPlayerToPieceMap().get(player2);
 //        List<Piece> pieces1 = new ArrayList<>(pieces);
-//        List<Cell> testList = pawnPieceService.getPossibleMoves(game, pieces1.get(0));
+//        List<Cell> testList = cannonPieceService.getPossibleMoves(game, pieces1.get(5));
 
         Map<PieceType, IPieceService> pieceToServiceMap = new HashMap<>();
         pieceToServiceMap.put(PieceType.PAWN, new PawnPieceService());
