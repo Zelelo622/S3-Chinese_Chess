@@ -28,7 +28,7 @@ public class CannonPieceService implements IPieceService {
                 possibleMoves.add(nextCell);
                 currCell = nextCell;
                 nextCell = currCell.getNeighbors().get(direction);
-                if (isMoveAvailable(game, piece, currCell) && stopsAfterKill(game, piece, currCell)) {
+                if (isMoveAvailable(game, piece, currCell) && stopsAfterKill(game, piece, currCell) && nextCell != null) {
                     possibleMoves.remove(currCell);
                     possibleMoves.add(nextCell);
                     break;
